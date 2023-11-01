@@ -1,0 +1,55 @@
+﻿@using Application.Dto;
+@model List<OrderDto>;
+
+@{
+    ViewData["Title"] = "Заказы";
+}
+
+<h1>Заказы</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Номер</th>
+            <th scope="col">Адрес отправителя</th>
+            <th scope="col">Адрес получателя</th>
+            <th scope="col">Вес груза</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Дата отгрузки</th>
+            <th scope="col">Дата создания</th>
+            <th scope="col">Редактировать</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int cnt = 1;
+            foreach (var t in Model)
+            {
+                <tr>
+                    <td>@cnt</td>
+                    <td>@t.OrderNumber</td>
+                    <td>@t.AddressSender</td>
+                    <td>@t.AddressRecipient</td>
+                    <td>@t.Weight + "тонн"</td>
+                    <td>@t.Price</td>
+                    <td>@t.PickupDt.ToString("dd MMMM YYYY")</td>
+                    <td>@t.CreatedDt.ToString("dd MMMM YYYY")</td>
+                    <td>
+                        <div>
+                            <form asp-controller="Home" asp-action="Order" method="post">
+                                <input type="hidden" name="OrderId" value="@t.Id" />
+                                <button class="btn btn-dark">Открыть</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                cnt++;
+            }
+        }
+    </tbody>
+</table>
+
+@*<form asp-controller="Tour" asp-action="AddTourView" method="post">
+    <button class="btn btn-dark">Создать</button>
+</form>*@
