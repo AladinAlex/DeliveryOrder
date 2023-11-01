@@ -1,5 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model CityModel;
+
+@{
+    ViewData["Title"] = "Города";
 }
 
 <h1>Создание заказа</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Город</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int cnt = 1;
+            foreach (var t in Model.cities)
+            {
+                <tr>
+                    <td>@cnt</td>
+                    <td>@t.Name</td>
+                </tr>
+                cnt++;
+            }
+        }
+    </tbody>
+</table>

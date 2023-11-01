@@ -1,5 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model TruckModel;
+
+@{
+    ViewData["Title"] = "Грузовики";
 }
 
-<h1>Создание заказа</h1>
+<h1>Грузовики</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Наименование автомобиля</th>
+            <th scope="col">Максимальная грузоподъемность, тонн</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int cnt = 1;
+            foreach (var t in Model.Trucks)
+            {
+                <tr>
+                    <td>@cnt</td>
+                    <td>@t.Name</td>
+                    <td>@t.Weight</td>
+                </tr>
+                cnt++;
+            }
+        }
+    </tbody>
+</table>

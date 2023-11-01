@@ -25,6 +25,8 @@ namespace Application
             CreateMap<PriceList, PriceListDto>()
                 .ForMember(dto => dto.CityStart, opt => opt.MapFrom(x => x.CityStart.Name))
                 .ForMember(dto => dto.CityFinish, opt => opt.MapFrom(x => x.CityFinish.Name));
+
+            CreateMap<Truck, TruckDto>();
         }
     }
 }

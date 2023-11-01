@@ -4,7 +4,9 @@ using Application.Services;
 using Database.Context;
 using Database.Repositories;
 using Domain.Interfaces;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,7 @@ builder.Services.AddDbContext<EfContext>(
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(builder.Configuration.GetConnectionString("DbDelivery")));
 
 var app = builder.Build();
 

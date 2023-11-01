@@ -14,11 +14,11 @@
             <th scope="col">Номер</th>
             <th scope="col">Адрес отправителя</th>
             <th scope="col">Адрес получателя</th>
-            <th scope="col">Вес груза</th>
+            <th scope="col">Вес груза, тонн</th>
             <th scope="col">Цена</th>
             <th scope="col">Дата отгрузки</th>
             <th scope="col">Дата создания</th>
-            <th scope="col">Редактировать</th>
+            <th scope="col">Просмотреть</th>
         </tr>
     </thead>
     <tbody>
@@ -31,10 +31,10 @@
                     <td>@t.OrderNumber</td>
                     <td>@t.AddressSender</td>
                     <td>@t.AddressRecipient</td>
-                    <td>@t.Weight + "тонн"</td>
+                    <td>@t.Weight</td>
                     <td>@t.Price</td>
-                    <td>@t.PickupDt.ToString("dd MMMM YYYY")</td>
-                    <td>@t.CreatedDt.ToString("dd MMMM YYYY")</td>
+                    <td>@t.PickupDt.ToString("f")</td>
+                    <td>@t.CreatedDt.ToString("f")</td>
                     <td>
                         <div>
                             <form asp-controller="Home" asp-action="Order" method="post">

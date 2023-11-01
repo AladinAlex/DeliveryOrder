@@ -26,5 +26,35 @@ namespace Application.Services
 
             return _mapper.Map<IEnumerable<OrderDto>>(orders);
         }
+
+        public async Task<IEnumerable<CityDto>> GetCities()
+        {
+            var cities = await _orderRep.GetCities();
+
+            return _mapper.Map<IEnumerable<CityDto>>(cities);
+        }
+
+        public async Task CreateOrder(int AddressSenderId, int AddressRecipientId, string AddressSender, string AddressRecipient, double weigth, DateTime PickupDt)
+        {
+            await _orderRep.CreateOrder(AddressSenderId, AddressRecipientId, AddressSender, AddressRecipient, weigth, PickupDt);
+        }
+
+        public async Task<IEnumerable<PriceListDto>> GetPriceLists()
+        {
+            var pl = await _orderRep.GetPriceLists();
+            return _mapper.Map<IEnumerable<PriceListDto>>(pl);
+        }
+
+        public async Task<IEnumerable<TruckDto>> GetTrucks()
+        {
+            var trs = await _orderRep.GetTrucks();
+            return _mapper.Map<IEnumerable<TruckDto>>(trs);
+        }
+
+        public async Task<OrderDto> GetOrderById(int OrderId)
+        {
+            var order = await _orderRep.GetOrderById(OrderId);
+            return _mapper.Map<OrderDto>(order);
+        }
     }
 }

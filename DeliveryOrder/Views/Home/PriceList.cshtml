@@ -1,5 +1,35 @@
-﻿@{
+﻿@model PriceListModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <h1>Прайс-лист</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Город отправки</th>
+            <th scope="col">Город назначения</th>
+            <th scope="col">Цена, руб</th>
+            <th scope="col">Расстояние, дн</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int cnt = 1;
+            foreach (var t in Model.priceLists)
+            {
+                <tr>
+                    <td>@cnt</td>
+                    <td>@t.CityStart</td>
+                    <td>@t.CityFinish</td>
+                    <td>@t.Price</td>
+                    <td>@t.DurationDay</td>
+                </tr>
+                cnt++;
+            }
+        }
+    </tbody>
+</table>

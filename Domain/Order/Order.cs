@@ -18,6 +18,8 @@ namespace Domain.Order
         public decimal Price { get; set; }
         public string OrderNumber { get; set; }
         public Truck Truck { get; set; }
-
+        public int TruckId { get; set; }
+        //public int AddressSenderId { get; set; }
+        //public int AddressRecipientId { get; set; }
     }
 }

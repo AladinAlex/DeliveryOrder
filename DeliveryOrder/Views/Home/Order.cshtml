@@ -1,5 +1,33 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model OrderModel;
+
+@{
+    ViewData["Title"] = "Заказ №" + Model.Order.OrderNumber;
 }
 
-<h1>Создание заказа</h1>
+<h1>Заказа № @Model.Order.OrderNumber</h1>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Номер</th>
+            <th scope="col">Адрес отправителя</th>
+            <th scope="col">Адрес получателя</th>
+            <th scope="col">Вес груза, тонн</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Дата отгрузки</th>
+            <th scope="col">Дата создания</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+        <tr>
+            <td>@Model.Order.OrderNumber</td>
+            <td>@Model.Order.AddressSender</td>
+            <td>@Model.Order.AddressRecipient</td>
+            <td>@Model.Order.Weight</td>
+            <td>@Model.Order.Price</td>
+            <td>@Model.Order.PickupDt.ToString("f")</td>
+            <td>@Model.Order.CreatedDt.ToString("f")</td>
+        </tr>
+        }
+    </tbody>
+</table>

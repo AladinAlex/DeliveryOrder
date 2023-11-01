@@ -1,5 +1,101 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model AddOrder;
+@{
+    ViewData["Title"] = "Создание заказа";
 }
 
 <h1>Создание заказа</h1>
+
+<div class="container-fluid">
+
+    <div class="col-12">
+        <h3>Создание вида</h3>
+        <form method="post">
+            <ul class="list-group mb-2">
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Город отправителя:</b>
+                        </div>
+                        <div class="col-lg-2">
+                            <select class="form-select" asp-for="@Model.AddressSenderId" name="AddressSenderId" required>
+                                @foreach(var a in Model.Cities)
+                                {
+                                    <option value=@a.Id>@a.Name</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Адрес отправителя:</b>
+                        </div>
+                        <div class="col-lg-10">
+                            <textarea class="form-control w-100" asp-for="@Model.AddressSender" name="AddressSender" style="height: 125px"></textarea>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Город получателя:</b>
+                        </div>
+                        <div class="col-lg-2">
+                            <select class="form-select" asp-for="@Model.AddressRecipientId" name="AddressRecipientId" required>
+                                @foreach (var a in Model.Cities)
+                                {
+                                    <option value=@a.Id>@a.Name</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Адрес получателя:</b>
+                        </div>
+                        <div class="col-lg-10">
+                            <textarea class="form-control w-100" asp-for="@Model.AddressRecipient" name="AddressRecipient" style="height: 125px"></textarea>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Вес:</b>
+                        </div>
+                        <div class="col-lg-10">
+                            <input class="form-control w-100" asp-for="@Model.Weight" name="Weight" type="number" step="1.00" min="1.00" max="60.00" value="1.00"/>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Дата отгрузки:</b>
+                        </div>
+                        <div class="col-lg-3">
+                            <input class="form-control" type="date" asp-for="@Model.PickupDt" name="PickupDt" value="@DateTime.Now.AddDays(1)" min="@DateTime.Now.AddDays(1)"/>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <div>
+                <button class="btn btn-dark" type="submit" asp-action="AddOrder" asp-controller="Home">
+                    <span>Сохранить</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>

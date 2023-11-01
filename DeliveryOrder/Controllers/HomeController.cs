@@ -27,29 +27,50 @@ namespace DeliveryOrder.Controllers
             return View(orders);
         }
 
-        public IActionResult CreateOrder()
+        public async Task<IActionResult> CreateOrder()
         {
-            return View();
+            var model = new AddOrder();
+            var ct = await _orderService.GetCities();
+            model.Cities = ct.ToList();
+            return View(model);
         }
 
-        public IActionResult PriceList()
+        public async Task<IActionResult> PriceList()
         {
-            return View();
+            var model = new PriceListModel();
+            var pls = await _orderService.GetPriceLists();
+            model.priceLists = pls.ToList();
+            return View(model);
         }
 
-        public IActionResult City()
+        public async Task<IActionResult> City()
         {
-            return View();
-        }
-        
-        public IActionResult Truck()
-        {
-            return View();
+            var model = new CityModel();
+            var cities = await _orderService.GetCities();
+            model.cities = cities.ToList();
+            return View(model);
         }
 
-        public IActionResult Order(int OrderId)
+        public async Task<IActionResult> Truck()
         {
-            return View();
+            var model = new TruckModel();
+            var trs = await _orderService.GetTrucks();
+            model.Trucks = trs.ToList();
+            return View(model);
+        }
+
+        public async Task<IActionResult> Order(int OrderId)
+        {
+            var model = new OrderModel();
+            var order = await _orderService.GetOrderById(OrderId);
+            model.Order = order;
+            return View(model);
+        }
+
+        public async Task<IActionResult> AddOrder(AddOrder model)
+        {
+            await _orderService.CreateOrder(model.AddressSenderId, model.AddressRecipientId, model.AddressSender, model.AddressRecipient, model.Weight, model.PickupDt);
+            return RedirectToAction("Orders");
         }
 
         //public IActionResult Privacy()

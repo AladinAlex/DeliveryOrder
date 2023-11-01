@@ -9,7 +9,7 @@ namespace Application.Dto
 {
     public class PriceListDto
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string CityStart { get; set; }
         public string CityFinish { get; set; }
         public decimal Price { get; set; }

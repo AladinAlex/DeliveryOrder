@@ -35,7 +35,7 @@ namespace Database.Context
                 a.HasIndex(a => a.Id).IsUnique(true);
                 //a.Property(a => a.сity).IsRequired();
                 //a.HasOne(x => x.сity).WithOne().HasForeignKey<Address>(x => x.сity.Id);
-                a.Property(a => a.address).IsRequired().HasColumnType("varchar(100)");
+                a.Property(a => a.address).IsRequired().HasColumnType("nvarchar(100)");
                 //a.Property(a => a.Street).IsRequired();
                 //a.Property(a => a.Build).IsRequired();
                 //a.Property(a => a.Apartment).IsRequired(false);
@@ -47,7 +47,7 @@ namespace Database.Context
                 c.HasKey(c => c.Id);
                 c.Property(x => x.Id).ValueGeneratedOnAdd();
                 c.HasIndex(c => c.Id).IsUnique(true);
-                c.Property(c => c.Name).IsRequired();
+                c.Property(c => c.Name).IsRequired().HasColumnType("nvarchar(100)");
             });
 
             builder.Entity<Order>(o =>
@@ -60,12 +60,13 @@ namespace Database.Context
                 //o.Property(o => o.AddressRecipient).IsRequired();
                 //o.Property(o => o.AddressSender).IsRequired();
                 //o.Property(o => o.AddressRecipient).IsRequired();
-                o.HasOne(o => o.AddressSender).WithOne().HasForeignKey("Address", "AddressSenderId");
-                o.HasOne(o => o.AddressRecipient).WithOne().HasForeignKey("Address", "AddressRecipientId");
+                o.HasOne(o => o.AddressSender).WithMany().OnDelete(DeleteBehavior.Restrict);
+                o.HasOne(o => o.AddressRecipient).WithMany().OnDelete(DeleteBehavior.Restrict);
+                o.HasOne(o => o.Truck).WithMany().HasForeignKey(x => x.TruckId);
                 o.Property(o => o.Weight).IsRequired().HasColumnType("float(15,2)");
                 o.Property(o => o.PickupDt).IsRequired().HasColumnType("date");
                 o.Property(o => o.CreatedDt).IsRequired();
-                o.Property(o => o.OrderNumber).IsRequired();
+                o.Property(o => o.OrderNumber).IsRequired().HasColumnType("nvarchar(100)"); ;
                 o.Property(o => o.Price).IsRequired();
             });
 
@@ -75,8 +76,8 @@ namespace Database.Context
                 o.HasKey(x => x.Id);
                 o.Property(x => x.Id).ValueGeneratedOnAdd();
                 o.HasIndex(a => a.Id).IsUnique(true);
-                o.HasOne(o => o.CityStart).WithOne().HasForeignKey("City", "CityStartId");
-                o.HasOne(o => o.CityFinish).WithOne().HasForeignKey("City", "CityFinishId");
+                o.HasOne(o => o.CityStart).WithMany().OnDelete(DeleteBehavior.Restrict);
+                o.HasOne(o => o.CityFinish).WithMany().OnDelete(DeleteBehavior.Restrict);
                 //o.Property(o => o.CityStart).IsRequired();
                 //o.Property(o => o.CityFinish).IsRequired();
                 o.Property(o => o.Price).IsRequired();
@@ -88,8 +89,8 @@ namespace Database.Context
                 o.HasKey(x => x.Id);
                 o.Property(x => x.Id).ValueGeneratedOnAdd();
                 o.HasIndex(a => a.Id).IsUnique(true);
-                o.Property(o => o.Weight).IsRequired();
-                o.Property(o => o.Name).IsRequired();
+                o.Property(o => o.Weight).IsRequired().HasColumnType("float(15,2)");
+                o.Property(o => o.Name).IsRequired().HasColumnType("nvarchar(100)"); ;
             });
         }
     }
