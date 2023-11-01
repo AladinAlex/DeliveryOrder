@@ -89,7 +89,7 @@ namespace Database.Repositories
 
             // 5. Поиск трака.
             string command = $"exec [order].GetFreeTruckId @weight = {weigth}";
-            var truck = await _dbConnection.QueryFirstAsync<Truck>(command);
+            var truck = await _dbConnection.QueryFirstAsync<Truck?>(command);
             if (truck == null || truck.Id == 0)
                 return;
 
